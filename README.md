@@ -5,7 +5,7 @@ As especificações do projeto podem ser encontradas no PDF.
 * [Raul Rodrigues](https://github.com/SandWoodJones)
 
 ## Clonar o repositório
-`git clone --recurse-submodules git@github.com:AlessiPG/blockchain-ed.git`
+`git clone --recurse-submodules https://github.com/AlessiPG/blockchain-ed.git`
 
 ## Compilação
 * `make` para compilar o programa.
