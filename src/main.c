@@ -28,7 +28,7 @@ int main() {
     for(i = 0; i< SHA256_DIGEST_LENGTH; i++)
         printf("%02x",blockchain->hash[i]);
     printf("\nMinerador = %d\n",blockchain->bloco.data[183]);
-    printf("%d", genRandLong(&r)%256);
+    printf("%d\n", genRandLong(&r)%256);
     for(i = 0;i < TOTAL_BLOCOS; ++i) {
     
     }
