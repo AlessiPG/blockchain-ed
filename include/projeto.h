@@ -1,6 +1,8 @@
 #ifndef __PROJETO_H
 #define __PROJETO_H
 
+#include "mtwister.h"
+
 #define TOTAL_BLOCOS 1000
 #define SHA256_DIGEST_LENGTH 32
 
@@ -18,6 +20,15 @@ typedef struct BlocoMinerado
   unsigned char hash[SHA256_DIGEST_LENGTH];
   struct BlocoMinerado *prox;
 } BlocoMinerado;
+
+typedef struct Blockchain
+{
+    BlocoMinerado *inicio;
+    BlocoMinerado *fim;
+    unsigned int tamanho;
+} Blockchain;
+
+void inicializaBlockchain(Blockchain *bc, MTRand *r);
 
 BlocoNaoMinerado *inicializaGenesis();
 

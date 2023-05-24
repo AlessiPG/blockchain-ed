@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include <string.h>
-#include "mtwister.h"
 #include "projeto.h"
 
 BlocoNaoMinerado *inicializaGenesis(){
