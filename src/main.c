@@ -26,8 +26,11 @@ int main() {
     for (i = 0; i< SHA256_DIGEST_LENGTH; i++) printf("%02x",blockchain.inicio->hash[i]);
     printf("\nMinerador = %d\n",blockchain.inicio->bloco.data[183]);
     printf("%ld\n", genRandLong(&r)%256);
-    for(i = 0;i < TOTAL_BLOCOS; ++i) {
-    
-    }
+    for(i = 0;i < TOTAL_BLOCOS; ++i) {}
 
+
+    BlocoMinerado teste;
+    adicionaNoFinal(&blockchain, &teste);
+
+    printf("%d\n", blockchain.fim->bloco.numero); // se printar 0 esta funcionando
 }
