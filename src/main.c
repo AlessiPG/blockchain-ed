@@ -33,4 +33,7 @@ int main() {
     adicionaNoFinal(&blockchain, &teste);
 
     printf("%d\n", blockchain.fim->bloco.numero); // se printar 0 esta funcionando
+    printf("%d\n", blockchain.tamanho);                                               
+
+    printf("%f\n", acharMediaBitcoins(blockchain, carteira));
 }
