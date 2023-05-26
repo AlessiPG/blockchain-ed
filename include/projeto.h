@@ -1,9 +1,10 @@
 #ifndef __PROJETO_H
 #define __PROJETO_H
 
+#include <string.h>
 #include "mtwister.h"
 
-#define TOTAL_BLOCOS 1000
+#define TOTAL_BLOCOS 10
 #define SHA256_DIGEST_LENGTH 32
 
 typedef struct BlocoNaoMinerado

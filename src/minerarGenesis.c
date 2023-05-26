@@ -3,6 +3,7 @@
 #include "openssl/crypto.h" //arquivo de definição necessário para SHA256_DIGEST_LENGTH
 #include "openssl/sha.h" //arquivo de definição necessário função SHA256
 #include "projeto.h"
+#include "mtwister.h"
 
 BlocoMinerado *minerarGenesis(BlocoNaoMinerado *bloco, MTRand *r){
     //escolhe o minerador
