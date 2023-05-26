@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "openssl/crypto.h" //arquivo de definição necessário para SHA256_DIGEST_LENGTH
-#include "openssl/sha.h" //arquivo de definição necessário função SHA256
+#include "openssl/crypto.h" //arquivo de definiÃ§Ã£o necessÃ¡rio para SHA256_DIGEST_LENGTH
+#include "openssl/sha.h" //arquivo de definiÃ§Ã£o necessÃ¡rio funÃ§Ã£o SHA256
 #include "mtwister.h"
 #include "projeto.h"
 
@@ -69,5 +69,4 @@ int main() {
         }
 */
     //printf("%d\n", blockchain.fim->bloco.numero); // se printar 0 esta funcionando
-
 }

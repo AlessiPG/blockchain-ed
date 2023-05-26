@@ -41,4 +41,6 @@ void imprimirNPrimeirosBlocos(BlocoMinerado blockchain, int n);
 
 void imprimirNonceIgual(BlocoMinerado blockchain, unsigned int n);
 
+float acharMediaBitcoins(Blockchain bc, unsigned int carteira[]);
+
 #endif
