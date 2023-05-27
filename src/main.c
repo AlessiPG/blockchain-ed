@@ -32,9 +32,12 @@ int main()
         printf("Numero do bloco: %d\n", aux->bloco.numero);
         printf("Nonce: %d\n", aux->bloco.nonce);
         printf("Data: ");
-        for (i = 0; i < 184; i++)
-            printf("%d", aux->bloco.data[i]);
+        for (i = 0; i < 61; i++){
+            printf("%d %d %d - ", aux->bloco.data[i],aux->bloco.data[i+1],aux->bloco.data[i+2]);
+            i+=2;
+        }
         printf("\n");
+        printf("Minerador: %d\n", aux->bloco.data[183]);
         printf("Hash anterior: ");
         for (i = 0; i < SHA256_DIGEST_LENGTH; i++)
             printf("%02x", aux->bloco.hashAnterior[i]);
@@ -47,4 +50,6 @@ int main()
 
         aux = aux->prox;
     }
+    //imprimirNPrimeirosBlocos(&blockchain, 10);
+    //imprimirNonceIgual(&blockchain, 599);
 }

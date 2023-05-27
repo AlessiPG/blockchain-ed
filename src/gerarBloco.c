@@ -5,6 +5,17 @@
 #include "openssl/sha.h"
 #include "mtwister.h"
 
+void aleatorio(unsigned char data[], MTRand *r){
+    unsigned int qtdTransacoes = genRandLong(r)%61;
+    for(int i = 0; i < qtdTransacoes; i++){
+        data[i] = genRandLong(r) % 256;
+        data[i+1] = genRandLong(r) % 256;
+        data[i+2] = genRandLong(r) % 50;
+        i+=2;
+    }
+    data[183]=genRandLong(r) % 256;
+}
+
 BlocoNaoMinerado *inicializaBloco(MTRand *r, int numero, unsigned char hash[])
 {
     BlocoNaoMinerado *novo = malloc(sizeof(BlocoNaoMinerado));
@@ -14,7 +25,7 @@ BlocoNaoMinerado *inicializaBloco(MTRand *r, int numero, unsigned char hash[])
     novo->nonce = 0;
     for (int i = 0; i < 184; ++i)
         novo->data[i] = 0;
-    gerarTransacoes(novo->data); // aqui a função receberá r quando gerarTransacoes estiver pronto
+    aleatorio(novo->data, r); // aqui a função receberá r quando gerarTransacoes estiver pronto
     memcpy(novo->hashAnterior, hash, SHA256_DIGEST_LENGTH);
     return novo;
 }

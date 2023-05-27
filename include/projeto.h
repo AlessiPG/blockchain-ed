@@ -9,10 +9,10 @@
 
 typedef struct BlocoNaoMinerado
 {
-  unsigned int numero; //4
-  unsigned int nonce; //4
-  unsigned char data[184]; //nao alterar. Deve ser inicializado com zeros.
-  unsigned char hashAnterior[SHA256_DIGEST_LENGTH]; //32
+  unsigned int numero;
+  unsigned int nonce;
+  unsigned char data[184];
+  unsigned char hashAnterior[SHA256_DIGEST_LENGTH];
 } BlocoNaoMinerado;
 
 typedef struct BlocoMinerado
@@ -43,9 +43,9 @@ void inicializaBlockchain(Blockchain *bc, MTRand *r);
 
 void adicionaNoFinal(Blockchain *bc, BlocoMinerado *bm);
 
-void imprimirNPrimeirosBlocos(BlocoMinerado blockchain, int n);
+void imprimirNPrimeirosBlocos(Blockchain *blockchain, int n);
 
-void imprimirNonceIgual(BlocoMinerado blockchain, unsigned int n);
+void imprimirNonceIgual(Blockchain *blockchain, unsigned int n);
 
 float acharMediaBitcoins(Blockchain bc, unsigned int carteira[]);
 
