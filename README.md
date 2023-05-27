@@ -3,6 +3,7 @@ As especificações do projeto podem ser encontradas no PDF.
 ## Integrantes
 * [Gabriel Alessi](https://github.com/AlessiPG)
 * [Raul Rodrigues](https://github.com/SandWoodJones)
+* [Caic Hirata](https://github.com/CaicHirata)
 
 ## Clonar o repositório
 `git clone --recurse-submodules https://github.com/AlessiPG/blockchain-ed.git`
