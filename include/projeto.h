@@ -29,13 +29,19 @@ typedef struct Blockchain
     unsigned int tamanho;
 } Blockchain;
 
-void inicializaBlockchain(Blockchain *bc, MTRand *r);
-
-void adicionaNoFinal(Blockchain *bc, BlocoMinerado *bm);
+BlocoMinerado *minerarGenesis(BlocoNaoMinerado *bloco, MTRand *r);
 
 BlocoNaoMinerado *inicializaGenesis();
 
-BlocoMinerado *minerarGenesis(BlocoNaoMinerado *bloco, MTRand *r);
+BlocoNaoMinerado *inicializaBloco(MTRand *r, int numero, unsigned char hash[]);
+
+void gerarTransacoes(unsigned char *data);
+
+void processaBloco(Blockchain *blockchain, MTRand *r, int numero, unsigned char hash[]);
+
+void inicializaBlockchain(Blockchain *bc, MTRand *r);
+
+void adicionaNoFinal(Blockchain *bc, BlocoMinerado *bm);
 
 void imprimirNPrimeirosBlocos(BlocoMinerado blockchain, int n);
 
