@@ -10,7 +10,7 @@ void imprimirNonceIgual(Blockchain *blockchain, unsigned int n){
     printf("=======================================\n");
     while (aux != NULL)
     {
-        if(aux->bloco.nonce == n){
+        if(aux->bloco.nonce == n){ //percorre a blockchain verificando quais blocos possuem um nonce = n
             printf("Numero do bloco: %d\n", aux->bloco.numero);
             printf("Nonce: %d\n", aux->bloco.nonce);
             printf("Data: ");
