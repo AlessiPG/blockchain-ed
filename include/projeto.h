@@ -1,52 +1,62 @@
-#ifndef __PROJETO_H
-#define __PROJETO_H
+#ifndef __PROJETO_H_
+#define __PROJETO_H_
 
-#include <string.h>
+#define DATA_TAM 184 
+#define CARTEIRA_TAM 256
+#define STRING_INICIAL "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks"
+#define SEED_ALEATORIA 1234567
+#define RECOMPENSA 50
+
+#include <stdbool.h>
+#include "openssl/sha.h"
 #include "mtwister.h"
 
-#define TOTAL_BLOCOS 10
-#define SHA256_DIGEST_LENGTH 32
-
-typedef struct BlocoNaoMinerado
-{
-  unsigned int numero; //4
-  unsigned int nonce; //4
-  unsigned char data[184]; //nao alterar. Deve ser inicializado com zeros.
-  unsigned char hashAnterior[SHA256_DIGEST_LENGTH]; //32
+typedef struct BlocoNaoMinerado {
+    unsigned int numero;
+    unsigned int nonce;
+    unsigned char data[DATA_TAM];
+    unsigned char hashAnterior[SHA256_DIGEST_LENGTH];
 } BlocoNaoMinerado;
 
-typedef struct BlocoMinerado
-{
-  BlocoNaoMinerado bloco;
-  unsigned char hash[SHA256_DIGEST_LENGTH];
-  struct BlocoMinerado *prox;
+typedef struct BlocoMinerado {
+    BlocoNaoMinerado bloco;
+    unsigned char hash[SHA256_DIGEST_LENGTH];
+    struct BlocoMinerado *prox;
 } BlocoMinerado;
 
-typedef struct Blockchain
-{
-    BlocoMinerado *inicio;
-    BlocoMinerado *fim;
+typedef struct No { // Lista de contas não vazias.
+    int chave;
+    struct No *prox;
+} No;
+
+typedef struct Contas {
     unsigned int tamanho;
+    No *lista;
+} Contas;
+
+typedef struct Blockchain {
+    BlocoMinerado *ini;
+    BlocoMinerado *fim;
+    unsigned int carteira[CARTEIRA_TAM];
+    Contas contas;
+    unsigned int tamanho;
+    MTRand r;
 } Blockchain;
 
-BlocoMinerado *minerarGenesis(BlocoNaoMinerado *bloco, MTRand *r);
 
-BlocoNaoMinerado *inicializaGenesis();
+BlocoNaoMinerado * inicializaGenesis();
+BlocoNaoMinerado * inicializaBloco(Blockchain *);
 
-BlocoNaoMinerado *inicializaBloco(MTRand *r, int numero, unsigned char hash[]);
+BlocoMinerado * mineraGenesis(BlocoNaoMinerado *, MTRand *);
+BlocoMinerado * mineraBloco(BlocoNaoMinerado *blc);
 
-void gerarTransacoes(unsigned char *data);
+No * gerarNo(int);
+bool buscarContas(Blockchain *, int);
+int adicionaConta(Blockchain *, int);
 
-void processaBloco(Blockchain *blockchain, MTRand *r, int numero, unsigned char hash[]);
+Blockchain * inicializaBlockchain();
+int novoBloco(Blockchain *);
 
-void inicializaBlockchain(Blockchain *bc, MTRand *r);
-
-void adicionaNoFinal(Blockchain *bc, BlocoMinerado *bm);
-
-void imprimirNPrimeirosBlocos(BlocoMinerado blockchain, int n);
-
-void imprimirNonceIgual(BlocoMinerado blockchain, unsigned int n);
-
-float acharMediaBitcoins(Blockchain bc, unsigned int carteira[]);
+int gerarTransacoes(unsigned char *);
 
 #endif
