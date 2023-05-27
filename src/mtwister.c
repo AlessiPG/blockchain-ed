@@ -1,1 +1,1 @@
-/home/swjones/documents/ed-projeto/mtwister/mtwister.c
+../mtwister/mtwister.c
