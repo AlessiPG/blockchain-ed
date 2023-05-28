@@ -17,13 +17,13 @@ Blockchain * inicializaBlockchain() {
     // Adiciona a recompensa em bitcoins na carteira do minerador
     nova->carteira[minerador] = RECOMPENSA;
     // Adiciona o minerador na lista de contas com dinheiro
-    adicionaConta(nova, minerador);
+    adicionaConta(&nova->contas, minerador);
 
     return nova;
 }
 
 int novoBloco(Blockchain *bc) {
-    BlocoMinerado *novo = mineraBloco(inicializaBloco(bc));
+    BlocoMinerado *novo = mineraBloco(bc, inicializaBloco(bc));
 
     bc->fim->prox = novo;
     bc->fim = novo;
@@ -33,7 +33,7 @@ int novoBloco(Blockchain *bc) {
     bc->carteira[minerador] += RECOMPENSA;
     // Se o minerador ja nao esta na lista de contas com dinheiro..
     if (!buscarContas(bc, minerador)) {
-        adicionaConta(bc, novo->bloco.data[DATA_TAM - 1]);
+        adicionaConta(&bc->contas, novo->bloco.data[DATA_TAM - 1]);
     }
     return 0;
 }

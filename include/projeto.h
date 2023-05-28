@@ -1,11 +1,13 @@
 #ifndef __PROJETO_H_
 #define __PROJETO_H_
 
+#define TOTAL_BLOCOS 10
 #define DATA_TAM 184 
 #define CARTEIRA_TAM 256
 #define STRING_INICIAL "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks"
 #define SEED_ALEATORIA 1234567
 #define RECOMPENSA 50
+#define MAX_TRANSACOES 61
 
 #include <stdbool.h>
 #include "openssl/sha.h"
@@ -34,11 +36,17 @@ typedef struct Contas {
     No *lista;
 } Contas;
 
+typedef struct Clientes {
+    unsigned int carteira[CARTEIRA_TAM];
+    Contas contas;
+} Clientes
+
 typedef struct Blockchain {
     BlocoMinerado *ini;
     BlocoMinerado *fim;
     unsigned int carteira[CARTEIRA_TAM];
     Contas contas;
+    Clientes clientes;
     unsigned int tamanho;
     MTRand r;
 } Blockchain;
@@ -48,15 +56,16 @@ BlocoNaoMinerado * inicializaGenesis();
 BlocoNaoMinerado * inicializaBloco(Blockchain *);
 
 BlocoMinerado * mineraGenesis(BlocoNaoMinerado *, MTRand *);
-BlocoMinerado * mineraBloco(BlocoNaoMinerado *blc);
+BlocoMinerado * mineraBloco(Blockchain *, BlocoNaoMinerado *);
 
 No * gerarNo(int);
 bool buscarContas(Blockchain *, int);
-int adicionaConta(Blockchain *, int);
+int adicionaConta(Contas *, int);
+Contas copiarListaContas(Contas);
 
 Blockchain * inicializaBlockchain();
 int novoBloco(Blockchain *);
 
-int gerarTransacoes(unsigned char *);
+unsigned int * gerarTransacoes(Blockchain *, unsigned char *);
 
 #endif

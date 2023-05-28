@@ -8,17 +8,20 @@ BlocoNaoMinerado * inicializaBloco(Blockchain *bc) {
 
     novo->numero = bc->fim->bloco.numero + 1;
     novo->nonce = 0;
-    if (gerarTransacoes(novo->data)) return NULL;
     memcpy(novo->hashAnterior, bc->fim->hash, SHA256_DIGEST_LENGTH);
 
     return novo;
 }
 
-BlocoMinerado * mineraBloco(BlocoNaoMinerado *blc) {
+BlocoMinerado * mineraBloco(Blockchain *chain, BlocoNaoMinerado *blc) {
     if (!blc) return NULL;
 
     BlocoMinerado *novo = malloc(sizeof(BlocoMinerado));
     if (!novo) return NULL;
+    
+    // Geramos as transacoes aqui pois precisamos trocar a copia da carteira pela carteira de verdade apos minerar o bloco.
+    unsigned int *bufferCarteira = gerarTransacoes(chain, blc->data);
+    if (!bufferCarteira) return NULL;
 
     while (1) {
         SHA256((unsigned char *) blc, sizeof(BlocoNaoMinerado), novo->hash);

@@ -5,8 +5,10 @@
 int main(void) {
     Blockchain *corrente = inicializaBlockchain();
     if (!corrente) return -1;
-
-    novoBloco(corrente);
+    
+    for (int i = 0; i < TOTAL_BLOCOS; i++) {
+        novoBloco(corrente);
+    }
 
     return 0;
 }
