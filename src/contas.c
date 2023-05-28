@@ -21,14 +21,30 @@ bool buscarContas(Blockchain *bc, int index) {
     return false;
 }
 
-int adicionaConta(Blockchain *bc, int idx) {
+int adicionaConta(Contas *cnts, int idx) {
     No *novo = gerarNo(idx);
     if (!novo) return -1;
     
-    novo->prox = bc->contas.lista;
-    bc->contas.lista = novo;
+    // Insere no comeco pois a ordem nao importa
+    novo->prox = cnts->lista;
+    cnts->lista = novo;
 
-    bc->contas.tamanho++;
+    cnts->tamanho++;
 
     return 0;
+}
+
+Contas copiarListaContas(Contas velho) {
+    Contas nova = { 
+        .tamanho = velho.tamanho
+    };
+    
+    No *atual = velho.lista;
+    // Copia cada elemento da lista velha 1 por 1
+    while (atual) {
+        adicionaConta(&nova, atual->chave);
+        atual = atual->prox;
+    }
+
+    return nova;
 }
