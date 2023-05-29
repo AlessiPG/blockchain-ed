@@ -5,11 +5,10 @@
 unsigned int checaTransacoes(BlocoMinerado *bloco)
 {
     int count = 0;
-    for (int i = 0; i < 61; i++)
+    for (int i = 0; i < 61; i+=3)
     {
         if (bloco->bloco.data[i] && bloco->bloco.data[i + 1] && bloco->bloco.data[i + 2] != 0)//checa as posições 3 a 3 para verificar se elas são de fato transações
             count++;
-        i += 2;
     }
     return count;
 }
@@ -37,7 +36,7 @@ void ordenacao(BlocoMinerado **v, int ini, int fim)
         selecao(v, ini + i, fim);//envia recursivamente o vetor para que sempre o bloco com menos transações seja posicionado na primeira posição
     }
 }
-void imprimirNPrimeirosBlocos(Blockchain *blockchain, int n)
+void imprimirNPrimeirosBlocos(Blockchain *blockchain, int n)//imprime blocos de 1 até n em ordem crescente de quantidade de transações por bloco
 {
     BlocoMinerado **vetor = malloc(sizeof(BlocoMinerado) * n);
     BlocoMinerado *aux = blockchain->inicio;
