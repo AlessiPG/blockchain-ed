@@ -4,7 +4,7 @@
 
 Blockchain * inicializaBlockchain() {
     Blockchain *nova = malloc(sizeof(Blockchain));
-    memset(nova->carteira, 0, sizeof(nova->carteira));
+    memset(nova->clientes.carteira, 0, sizeof(nova->clientes.carteira));
     nova->tamanho = 0;
     nova->r = seedRand(SEED_ALEATORIA);
 
@@ -15,9 +15,9 @@ Blockchain * inicializaBlockchain() {
     
     unsigned char minerador = genesis->bloco.data[DATA_TAM - 1];
     // Adiciona a recompensa em bitcoins na carteira do minerador
-    nova->carteira[minerador] = RECOMPENSA;
+    nova->clientes.carteira[minerador] = RECOMPENSA;
     // Adiciona o minerador na lista de contas com dinheiro
-    adicionaConta(&nova->contas, minerador);
+    adicionaConta(&nova->clientes.contas, minerador);
 
     return nova;
 }
@@ -30,10 +30,10 @@ int novoBloco(Blockchain *bc) {
     bc->tamanho++;
 
     unsigned char minerador = novo->bloco.data[DATA_TAM - 1];
-    bc->carteira[minerador] += RECOMPENSA;
+    bc->clientes.carteira[minerador] += RECOMPENSA;
     // Se o minerador ja nao esta na lista de contas com dinheiro..
     if (!buscarContas(bc, minerador)) {
-        adicionaConta(&bc->contas, novo->bloco.data[DATA_TAM - 1]);
+        adicionaConta(&bc->clientes.contas, novo->bloco.data[DATA_TAM - 1]);
     }
     return 0;
 }

@@ -39,13 +39,11 @@ typedef struct Contas {
 typedef struct Clientes {
     unsigned int carteira[CARTEIRA_TAM];
     Contas contas;
-} Clientes
+} Clientes;
 
 typedef struct Blockchain {
     BlocoMinerado *ini;
     BlocoMinerado *fim;
-    unsigned int carteira[CARTEIRA_TAM];
-    Contas contas;
     Clientes clientes;
     unsigned int tamanho;
     MTRand r;
@@ -61,7 +59,9 @@ BlocoMinerado * mineraBloco(Blockchain *, BlocoNaoMinerado *);
 No * gerarNo(int);
 bool buscarContas(Blockchain *, int);
 int adicionaConta(Contas *, int);
-Contas copiarListaContas(Contas);
+
+Contas copiaListaContas(Contas);
+unsigned int * copiaCarteira(unsigned int []);
 
 Blockchain * inicializaBlockchain();
 int novoBloco(Blockchain *);

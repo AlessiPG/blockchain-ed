@@ -12,7 +12,7 @@ No * gerarNo(int valor) {
 }
 
 bool buscarContas(Blockchain *bc, int index) {
-    No *atual = bc->contas.lista;
+    No *atual = bc->clientes.contas.lista;
     while (atual) {
         if (atual->chave == index) return true;
         atual = atual->prox;
@@ -34,7 +34,7 @@ int adicionaConta(Contas *cnts, int idx) {
     return 0;
 }
 
-Contas copiarListaContas(Contas velho) {
+Contas copiaListaContas(Contas velho) {
     Contas nova = { 
         .tamanho = velho.tamanho
     };
