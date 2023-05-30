@@ -1,7 +1,7 @@
 #ifndef __PROJETO_H_
 #define __PROJETO_H_
 
-#define TOTAL_BLOCOS 10
+#define TOTAL_BLOCOS 1
 #define DATA_TAM 184 
 #define CARTEIRA_TAM 256
 #define STRING_INICIAL "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks"
@@ -56,16 +56,21 @@ BlocoNaoMinerado * inicializaBloco(Blockchain *);
 BlocoMinerado * mineraGenesis(BlocoNaoMinerado *, MTRand *);
 BlocoMinerado * mineraBloco(Blockchain *, BlocoNaoMinerado *);
 
+void inicializaContas(Contas *);
 No * gerarNo(int);
 bool buscarContas(Blockchain *, int);
 int adicionaConta(Contas *, int);
 
-Contas copiaListaContas(Contas);
-unsigned int * copiaCarteira(unsigned int []);
+int copiaContas(Contas, Contas *);
+void copiaCarteira(unsigned int[], unsigned int []);
 
 Blockchain * inicializaBlockchain();
 int novoBloco(Blockchain *);
 
-unsigned int * gerarTransacoes(Blockchain *, unsigned char *);
+Clientes criarBuffer(Blockchain *);
+Clientes gerarTransacoes(Blockchain *, unsigned char *);
+
+void printaCarteira(unsigned int *);
+void printaContas(Contas);
 
 #endif
