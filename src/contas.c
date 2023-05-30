@@ -6,7 +6,7 @@ void inicializaContas(Contas *contas) {
     contas->lista = NULL;
 }
 
-No * gerarNo(int valor) {
+No * gerarNo(unsigned int valor) {
     No *novo = malloc(sizeof(struct No));
     if (!novo) return NULL;
 
@@ -16,8 +16,8 @@ No * gerarNo(int valor) {
     return novo;
 }
 
-int adicionaConta(Contas *contas, int idx) {
-    No *novo = gerarNo(idx);
+int adicionaConta(Contas *contas, unsigned int index) {
+    No *novo = gerarNo(index);
     if (!novo) return 1;
     
     // Insere no comeco pois a ordem nao importa
@@ -31,7 +31,6 @@ int adicionaConta(Contas *contas, int idx) {
 
 int copiaContas(Contas orig, Contas *dest) {
     printaContas(*dest);
-    dest->tamanho = orig.tamanho;
     
     No *atual = orig.lista;
     // Copia cada elemento da origem 1 por 1
@@ -43,7 +42,17 @@ int copiaContas(Contas orig, Contas *dest) {
     return 0;
 }
 
-bool buscarContas(Blockchain *bc, int index) {
+// retorna o index para carteira do n-esimo elemento da lista (n começa em 1)
+unsigned int obterIndexDaConta(Contas contas, unsigned int n) {
+    if (n > contas.tamanho) return -1;
+    No *atual = contas.lista;
+    
+    for (unsigned int i = 1; i < n && atual; i++) atual = atual->prox;
+
+    return atual->chave;
+}
+
+bool buscarContas(Blockchain *bc, unsigned int index) {
     No *atual = bc->clientes.contas.lista;
     while (atual) {
         if (atual->chave == index) return true;

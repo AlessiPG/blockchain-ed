@@ -22,7 +22,7 @@ $(EXECUTABLE): $(OBJ_FILES)
 	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
 
 # for any file ending in .o in OBJ_DIR, dependent on the respective .c file and header
-# compile it generating object files and output it as with the same name. Also makes sure that OBJ_DIR exists
+# compile it generating object files and output it as with the same name. Also makes sure that OBJ_DIR exists.
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(DEP_FILES) | $(OBJ_DIR)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
@@ -31,7 +31,7 @@ clean:
 	rm -rf $(OBJ_DIR)
 
 run:
-	@make -s $(EXECUTABLE) # calls make silently
+	@make -s $(EXECUTABLE) # calls make silently, which will execute the first rule, compiling the project.
 	$(EXECUTABLE)
 
 # creates the bin directory if it does not exist

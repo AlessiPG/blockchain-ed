@@ -27,7 +27,7 @@ typedef struct BlocoMinerado {
 } BlocoMinerado;
 
 typedef struct No { // Lista de contas não vazias.
-    int chave;
+    unsigned int chave;
     struct No *prox;
 } No;
 
@@ -57,9 +57,10 @@ BlocoMinerado * mineraGenesis(BlocoNaoMinerado *, MTRand *);
 BlocoMinerado * mineraBloco(Blockchain *, BlocoNaoMinerado *);
 
 void inicializaContas(Contas *);
-No * gerarNo(int);
-bool buscarContas(Blockchain *, int);
-int adicionaConta(Contas *, int);
+No * gerarNo(unsigned int);
+int adicionaConta(Contas *, unsigned int);
+unsigned int obterIndexDaConta(Contas, unsigned int);
+bool buscarContas(Blockchain *, unsigned int);
 
 int copiaContas(Contas, Contas *);
 void copiaCarteira(unsigned int[], unsigned int []);
@@ -68,6 +69,7 @@ Blockchain * inicializaBlockchain();
 int novoBloco(Blockchain *);
 
 Clientes criarBuffer(Blockchain *);
+unsigned int * gerarNumerosTransacao(Blockchain *, Clientes);
 Clientes gerarTransacoes(Blockchain *, unsigned char *);
 
 void printaCarteira(unsigned int *);
