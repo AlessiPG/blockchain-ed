@@ -30,8 +30,6 @@ int adicionaConta(Contas *contas, unsigned int index) {
 }
 
 int copiaContas(Contas orig, Contas *dest) {
-    printaContas(*dest);
-    
     No *atual = orig.lista;
     // Copia cada elemento da origem 1 por 1
     while (atual) {
@@ -52,10 +50,36 @@ unsigned int obterIndexDaConta(Contas contas, unsigned int n) {
     return atual->chave;
 }
 
-bool buscarContas(Blockchain *bc, unsigned int index) {
-    No *atual = bc->clientes.contas.lista;
+// remove o elemento da lista com chave igual a n
+void removeConta(Contas *contas, unsigned int n) {
+    No* atual = contas->lista;
+    
+    // checa se o primeiro elemento ja é o correto
+    if (atual->chave == n) {
+        contas->lista = atual->prox;
+        free(atual);
+        return;
+    }
+
+    No* ultimo = NULL;
     while (atual) {
-        if (atual->chave == index) return true;
+        if (atual->chave == n) break;
+        ultimo = atual;
+        atual = atual->prox;
+    }
+
+    if (atual) {
+        ultimo->prox = atual->prox;
+        free(atual);
+    }
+
+    contas->tamanho--;
+}
+
+bool buscaConta(Contas contas, unsigned int n) {
+    No *atual = contas.lista;
+    while (atual) {
+        if (atual->chave == n) return true;
         atual = atual->prox;
     }
 

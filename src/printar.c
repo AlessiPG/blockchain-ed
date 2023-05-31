@@ -6,11 +6,16 @@ void printaCarteira(unsigned int *carteira) {
     printf("%d\n\n", carteira[CARTEIRA_TAM - 1]);
 }
 
-void printaContas(Contas contas) {
-    No *atual = contas.lista;
+void printaContas(Clientes clientes) {
+    No *atual = clientes.contas.lista;
     
     while(atual) {
-        printf("%d\n", atual->chave);
+        printf("%d:%d\n", atual->chave, clientes.carteira[atual->chave]);
         atual = atual->prox;
     }
+}
+
+void printaData(unsigned char *data) {
+    for (int i = 0; i < DATA_TAM; i++) printf("%u ", data[i]);
+    printf("\n");
 }

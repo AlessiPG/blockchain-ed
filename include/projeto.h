@@ -60,7 +60,8 @@ void inicializaContas(Contas *);
 No * gerarNo(unsigned int);
 int adicionaConta(Contas *, unsigned int);
 unsigned int obterIndexDaConta(Contas, unsigned int);
-bool buscarContas(Blockchain *, unsigned int);
+void removeConta(Contas *, unsigned int);
+bool buscaConta(Contas, unsigned int);
 
 int copiaContas(Contas, Contas *);
 void copiaCarteira(unsigned int[], unsigned int []);
@@ -73,6 +74,7 @@ unsigned int * gerarNumerosTransacao(Blockchain *, Clientes);
 Clientes gerarTransacoes(Blockchain *, unsigned char *);
 
 void printaCarteira(unsigned int *);
-void printaContas(Contas);
+void printaContas(Clientes);
+void printaData(unsigned char *);
 
 #endif

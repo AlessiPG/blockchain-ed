@@ -33,7 +33,7 @@ int novoBloco(Blockchain *bc) {
     unsigned char minerador = novo->bloco.data[DATA_TAM - 1];
     bc->clientes.carteira[minerador] += RECOMPENSA;
     // Se o minerador ja nao esta na lista de contas com dinheiro..
-    if (!buscarContas(bc, minerador)) {
+    if (!buscaConta(bc->clientes.contas, minerador)) {
         if (adicionaConta(&bc->clientes.contas, novo->bloco.data[DATA_TAM - 1])) return 1;
     }
     return 0;

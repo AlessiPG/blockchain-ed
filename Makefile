@@ -34,6 +34,9 @@ run:
 	@make -s $(EXECUTABLE) # calls make silently, which will execute the first rule, compiling the project.
 	$(EXECUTABLE)
 
+debug: $(EXECUTABLE)
+	gdb $(EXECUTABLE)
+
 # creates the bin directory if it does not exist
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)

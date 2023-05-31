@@ -19,7 +19,7 @@ BlocoNaoMinerado * inicializaGenesis() {
 
 BlocoMinerado * mineraGenesis(BlocoNaoMinerado *gen, MTRand *r) {
     if (!gen) return NULL;
-    gen->data[183] = genRandLong(r) % 256; // escolhe o minerador.
+    gen->data[183] = genRandLong(r) % CARTEIRA_TAM; // escolhe o minerador.
     
     BlocoMinerado *novo = malloc(sizeof(BlocoMinerado));
     if (!novo) return NULL;
