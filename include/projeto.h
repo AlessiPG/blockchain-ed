@@ -76,5 +76,7 @@ Clientes gerarTransacoes(Blockchain *, unsigned char *);
 void printaCarteira(unsigned int *);
 void printaContas(Clientes);
 void printaData(unsigned char *);
+void printaBlocoNaoMinerado(BlocoNaoMinerado);
+void printaBlocoMinerado(BlocoMinerado);
 
 #endif

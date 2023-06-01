@@ -1,6 +1,35 @@
 #include <stdio.h>
 #include "projeto.h"
 
+void printaData(unsigned char *data) {
+    int j, i = 1;
+    for (j = 0; j < DATA_TAM - 3; j += 3) {
+        printf("%3hhu %3hhu %3hhu | ", data[j], data[j+1], data[j+2]);
+        if (i % 9 == 0) printf("\n");
+        i++;
+    }
+    printf("Minerador: %3hhu\n", data[j]);
+}
+
+void printaHash(unsigned char *hash) {
+    int i;
+    for (i = 0; i < SHA256_DIGEST_LENGTH - 1; i++) printf("%hhu.", hash[i]);
+    printf("%hhu\n", hash[i]);
+}
+
+void printaBlocoNaoMinerado(BlocoNaoMinerado bloco) {
+    printf("Número: %u\tNonce: %u\nData:\n", bloco.numero, bloco.nonce);
+    printaData(bloco.data);
+    printf("Hash anterior: ");
+    printaHash(bloco.hashAnterior);
+}
+
+void printaBlocoMinerado(BlocoMinerado bloco) {
+    printaBlocoNaoMinerado(bloco.bloco);
+    printf("Hash atual   : ");
+    printaHash(bloco.hash);
+}
+
 void printaCarteira(unsigned int *carteira) {
     for (int i = 0; i < CARTEIRA_TAM - 1; i++) printf("%d-", carteira[i]);
     printf("%d\n\n", carteira[CARTEIRA_TAM - 1]);
@@ -9,13 +38,10 @@ void printaCarteira(unsigned int *carteira) {
 void printaContas(Clientes clientes) {
     No *atual = clientes.contas.lista;
     
-    while(atual) {
-        printf("%d:%d\n", atual->chave, clientes.carteira[atual->chave]);
+    while(atual->prox) {
+        printf("%d->", atual->chave);
         atual = atual->prox;
     }
-}
-
-void printaData(unsigned char *data) {
-    for (int i = 0; i < DATA_TAM; i++) printf("%u ", data[i]);
+    printf("%d", atual->chave);
     printf("\n");
 }
