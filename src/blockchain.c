@@ -24,9 +24,6 @@ Blockchain * inicializaBlockchain() {
 }
 
 int novoBloco(Blockchain *bc) {
-    //BlocoNaoMinerado *teste = inicializaBloco(bc);
-    //BlocoMinerado *novo = mineraBloco(bc, teste);
-    //printaBlocoNaoMinerado(*teste);
     BlocoMinerado *novo = mineraBloco(bc, inicializaBloco(bc));
     printaBlocoMinerado(*novo);
 
@@ -37,8 +34,6 @@ int novoBloco(Blockchain *bc) {
     unsigned char minerador = novo->bloco.data[DATA_TAM - 1];
     bc->clientes.carteira[minerador] += RECOMPENSA;
     // Se o minerador ja nao esta na lista de contas com dinheiro..
-    if (!buscaConta(bc->clientes.contas, minerador)) {
-        if (adicionaConta(&bc->clientes.contas, novo->bloco.data[DATA_TAM - 1])) return 1;
-    }
+    if (!buscaConta(bc->clientes.contas, minerador)) if (adicionaConta(&bc->clientes.contas, novo->bloco.data[DATA_TAM - 1])) return 1;
     return 0;
 }

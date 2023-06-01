@@ -1,7 +1,7 @@
 #ifndef __PROJETO_H_
 #define __PROJETO_H_
 
-#define TOTAL_BLOCOS 1
+#define TOTAL_BLOCOS 1000
 #define DATA_TAM 184 
 #define CARTEIRA_TAM 256
 #define STRING_INICIAL "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks"
@@ -26,11 +26,12 @@ typedef struct BlocoMinerado {
     struct BlocoMinerado *prox;
 } BlocoMinerado;
 
-typedef struct No { // Lista de contas não vazias.
+typedef struct No {
     unsigned int chave;
     struct No *prox;
 } No;
 
+// Lista de contas não vazias.
 typedef struct Contas {
     unsigned int tamanho;
     No *lista;

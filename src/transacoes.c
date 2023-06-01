@@ -9,14 +9,14 @@ unsigned int * gerarNumerosTransacao(Blockchain *bc, Clientes clientes) {
     unsigned int *nums = malloc(sizeof(unsigned int) * 3);
     if (!nums) return NULL;
     
-    // origem: intervalo de [1 - tamanho da lista de contas]
+    // origem: intervalo de [0 - tamanho da lista de contas]
     nums[0] = genRandLong(&bc->r) % clientes.contas.tamanho;
     // convertemos o indice da lista, pra um indice da carteira
     nums[0] = obterIndexDaConta(clientes.contas, nums[0]);
 
     // destino: intervalo de [0 - CARTEIRA_TAM] evitando que seja igual a origem
     nums[1] = nums[0];
-    while (nums[0] == nums[1]) nums[1] = genRandLong(&bc->r) % CARTEIRA_TAM;
+    while (nums[1] == nums[0]) nums[1] = genRandLong(&bc->r) % CARTEIRA_TAM;
     
     // quantidade: intervalo de [0 - dinheiro na conta do origem-esimo elemento da lista de contas
     nums[2] = genRandLong(&bc->r) % (clientes.carteira[nums[0]] + 1);
@@ -44,7 +44,9 @@ Clientes gerarTransacoes(Blockchain *bc, unsigned char *data) {
         // adicionamos a quantidade de moedas na carteira do destino
         bufferClientes.carteira[numeros[1]] += numeros[2];
         // se a quantidade nao foi 0 e a conta ja nao estava na lista, adicionamos ela na lista
-        if (numeros[2] > 0 && !buscaConta(bufferClientes.contas, numeros[1])) adicionaConta(&bufferClientes.contas, numeros[1]);
+        if (numeros[2] > 0 && !buscaConta(bufferClientes.contas, numeros[1])) {
+            adicionaConta(&bufferClientes.contas, numeros[1]);
+        }
 
         // finalmente, adicionamos os numeros na data e aumentamos o index por 3
         data[index] = numeros[0];
