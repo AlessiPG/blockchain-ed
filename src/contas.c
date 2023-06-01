@@ -6,16 +6,6 @@ void inicializaContas(Contas *contas) {
     contas->lista = NULL;
 }
 
-No * gerarNo(unsigned int valor) {
-    No *novo = malloc(sizeof(struct No));
-    if (!novo) return NULL;
-
-    novo->chave = valor;
-    novo->prox = NULL;
-
-    return novo;
-}
-
 int adicionaConta(Contas *contas, unsigned int index) {
     No *novo = gerarNo(index);
     if (!novo) return 1;

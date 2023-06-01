@@ -8,6 +8,8 @@ int main(void) {
     for (int i = 0; i < TOTAL_BLOCOS - 1; i++) {
         novoBloco(corrente);
     }
+    
+    menu(corrente);
 
     return 0;
 }

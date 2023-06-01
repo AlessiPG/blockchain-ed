@@ -31,8 +31,12 @@ void printaBlocoMinerado(BlocoMinerado bloco) {
 }
 
 void printaCarteira(unsigned int *carteira) {
-    for (int i = 0; i < CARTEIRA_TAM - 1; i++) printf("%d-", carteira[i]);
-    printf("%d\n\n", carteira[CARTEIRA_TAM - 1]);
+    for (int i = 0; i < CARTEIRA_TAM; i += 16) {
+        for (int j = 0; j < 16; j++) {
+            printf("%3u:%3u\t", i + j, carteira[i + j]);
+        }
+        printf("\n");
+    }
 }
 
 void printaContas(Clientes clientes) {
@@ -44,4 +48,14 @@ void printaContas(Clientes clientes) {
     }
     printf("%d", atual->chave);
     printf("\n");
+}
+
+void printaNos(No *lista) {
+    No *atual = lista;
+
+    while (atual->prox) {
+        printf("%d, ", atual->chave);
+        atual = atual->prox;
+    }
+    printf("%d", atual->chave);
 }

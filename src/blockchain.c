@@ -25,7 +25,6 @@ Blockchain * inicializaBlockchain() {
 
 int novoBloco(Blockchain *bc) {
     BlocoMinerado *novo = mineraBloco(bc, inicializaBloco(bc));
-    printaBlocoMinerado(*novo);
 
     bc->fim->prox = novo;
     bc->fim = novo;

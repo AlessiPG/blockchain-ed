@@ -57,8 +57,11 @@ BlocoNaoMinerado * inicializaBloco(Blockchain *);
 BlocoMinerado * mineraGenesis(BlocoNaoMinerado *, MTRand *);
 BlocoMinerado * mineraBloco(Blockchain *, BlocoNaoMinerado *);
 
-void inicializaContas(Contas *);
 No * gerarNo(unsigned int);
+No * adicionaNo(No *, unsigned int);
+void freeEmLista(No *lista);
+
+void inicializaContas(Contas *);
 int adicionaConta(Contas *, unsigned int);
 unsigned int obterIndexDaConta(Contas, unsigned int);
 void removeConta(Contas *, unsigned int);
@@ -79,5 +82,10 @@ void printaContas(Clientes);
 void printaData(unsigned char *);
 void printaBlocoNaoMinerado(BlocoNaoMinerado);
 void printaBlocoMinerado(BlocoMinerado);
+void printaNos(No *);
+
+void menu(Blockchain *);
+
+void maisBitcoins(Blockchain *);
 
 #endif
