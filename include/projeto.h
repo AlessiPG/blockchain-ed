@@ -7,7 +7,7 @@
 #define STRING_INICIAL "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks"
 #define SEED_ALEATORIA 1234567
 #define RECOMPENSA 50
-#define MAX_TRANSACOES 61
+#define MAX_TRANSACOES (DATA_TAM - 1) / 3
 
 #include <stdbool.h>
 #include "openssl/sha.h"
@@ -50,7 +50,6 @@ typedef struct Blockchain {
     MTRand r;
 } Blockchain;
 
-
 BlocoNaoMinerado * inicializaGenesis();
 BlocoNaoMinerado * inicializaBloco(Blockchain *);
 
@@ -72,12 +71,14 @@ void copiaCarteira(unsigned int[], unsigned int []);
 
 Blockchain * inicializaBlockchain();
 int novoBloco(Blockchain *);
+BlocoMinerado * obterBlocoPorNumero(Blockchain *, unsigned int);
 
 Clientes criarBuffer(Blockchain *);
-unsigned int * gerarNumerosTransacao(Blockchain *, Clientes);
 Clientes gerarTransacoes(Blockchain *, unsigned char *);
+unsigned int obterNumeroTransacoes(BlocoNaoMinerado);
 
 void printaCarteira(unsigned int *);
+void printaHash(unsigned char *);
 void printaContas(Clientes);
 void printaData(unsigned char *);
 void printaBlocoNaoMinerado(BlocoNaoMinerado);
@@ -87,5 +88,10 @@ void printaNos(No *);
 void menu(Blockchain *);
 
 void maisBitcoins(Blockchain *);
+void maisMinerou(Blockchain *);
+void maisTransacoes(Blockchain *);
+void menosTransacoes(Blockchain *);
+void mediaBitcoins(Blockchain *);
+void printaNBlocos(Blockchain *, unsigned int, unsigned int);
 
 #endif

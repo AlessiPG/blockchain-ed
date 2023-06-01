@@ -1,11 +1,12 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include "projeto.h"
 
 /*  Ordem de geração de numeros
         1) numero de transacoes do bloco  
         2) os valores das transacoes (origem>destino>qtd)
         3) codigo minerador */
-unsigned int * gerarNumerosTransacao(Blockchain *bc, Clientes clientes) {
+static unsigned int * gerarNumerosAleatorios(Blockchain *bc, Clientes clientes) {
     unsigned int *nums = malloc(sizeof(unsigned int) * 3);
     if (!nums) return NULL;
     
@@ -28,13 +29,13 @@ Clientes gerarTransacoes(Blockchain *bc, unsigned char *data) {
     // Precisamos fazer copias do vetor da carteira e da lista de contas para podermos alterar sem ter efeitos na blockchain
     Clientes bufferClientes = criarBuffer(bc);
     
-    int n_transacoes = genRandLong(&bc->r) % MAX_TRANSACOES;
+    int n_transacoes = genRandLong(&bc->r) % (MAX_TRANSACOES + 1);
 
     unsigned int index = 0; // index para data
  
     for (int i = 0; i < n_transacoes; i++) {
         // numeros[0] = origem, [1] = destino, [2] = quantidade
-        unsigned int *numeros = gerarNumerosTransacao(bc, bufferClientes);
+        unsigned int *numeros = gerarNumerosAleatorios(bc, bufferClientes);
 
         // removemos a quantidade de moedas na carteira da origem
         bufferClientes.carteira[numeros[0]] -= numeros[2];
@@ -62,3 +63,15 @@ Clientes gerarTransacoes(Blockchain *bc, unsigned char *data) {
 
     return bufferClientes;
 }
+
+unsigned int obterNumeroTransacoes(BlocoNaoMinerado bloco) {
+    unsigned int n = 0;
+
+    for (int i = 0; i < DATA_TAM; i += 3) {
+        // checamos se os 3 numeros sao iguais a 0
+        if (bloco.data[i] + bloco.data[i+1] + bloco.data[i+2] == 0) break;
+        n++;
+    }
+
+    return n;
+};

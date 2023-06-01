@@ -18,7 +18,7 @@ void printaHash(unsigned char *hash) {
 }
 
 void printaBlocoNaoMinerado(BlocoNaoMinerado bloco) {
-    printf("Número: %u\tNonce: %u\nData:\n", bloco.numero, bloco.nonce);
+    printf("Número: %u\tNonce: %u\nData:\nNº de transações: %u\n", bloco.numero, bloco.nonce, obterNumeroTransacoes(bloco));
     printaData(bloco.data);
     printf("Hash anterior: ");
     printaHash(bloco.hashAnterior);

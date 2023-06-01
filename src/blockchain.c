@@ -36,3 +36,16 @@ int novoBloco(Blockchain *bc) {
     if (!buscaConta(bc->clientes.contas, minerador)) if (adicionaConta(&bc->clientes.contas, novo->bloco.data[DATA_TAM - 1])) return 1;
     return 0;
 }
+
+BlocoMinerado * obterBlocoPorNumero(Blockchain *bc, unsigned int n) {
+    if (n > TOTAL_BLOCOS) return NULL;
+    
+    BlocoMinerado *atual = bc->ini;
+
+    while (n != 1) {
+        atual = atual->prox;
+        n--;
+    }
+
+    return atual;
+}

@@ -22,6 +22,8 @@ BlocoMinerado * mineraBloco(Blockchain *chain, BlocoNaoMinerado *blc) {
     // Geramos as transacoes aqui pois precisamos trocar a copia da carteira pela carteira de verdade apos minerar o bloco.
     Clientes bufferClientes = gerarTransacoes(chain, blc->data);
 
+    obterNumeroTransacoes(*blc);
+
     while (1) {
         SHA256((unsigned char *) blc, sizeof(BlocoNaoMinerado), novo->hash);
         if (novo->hash[0] == 0) break;
