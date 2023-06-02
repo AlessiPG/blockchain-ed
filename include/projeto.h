@@ -93,5 +93,8 @@ void maisTransacoes(Blockchain *);
 void menosTransacoes(Blockchain *);
 void mediaBitcoins(Blockchain *);
 void printaNBlocos(Blockchain *, unsigned int, unsigned int);
+void printaNBlocosDoMinerador(Blockchain *, unsigned int, unsigned int);
+void printaNBlocosOrdenados(Blockchain *, unsigned int);
+void printaBlocosComNonce(Blockchain *, unsigned int);
 
 #endif

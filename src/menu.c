@@ -2,7 +2,7 @@
 #include "projeto.h"
 
 void menu(Blockchain *blc) {
-    printf("O que deseja calcular?\n\ta) Endereço com mais bitcoins\n\tb) Endereço que minerou mais blocos\n\tc) Hash do bloco com mais transações\n\td) Hash do bloco com menos transações\n\te) Média de bitcoins por bloco\n\tf) Printar bloco\n\tg) Printar N blocos minerados por um endereço\n");
+    printf("O que deseja calcular?\n\ta) Endereço com mais bitcoins\n\tb) Endereço que minerou mais blocos\n\tc) Hash do bloco com mais transações\n\td) Hash do bloco com menos transações\n\te) Média de bitcoins por bloco\n\tf) Printar bloco\n\tg) Printar N blocos minerados por um endereço\n\th) Printar N blocos em ordem crescente de número de transações\n\ti) Printar todos os blocos que tem um dado nonce\n");
     char resposta;
     scanf("%c", &resposta);
     // checa se resposta esta entre a e i
@@ -37,7 +37,19 @@ void menu(Blockchain *blc) {
             printf("Qual o endereço do minerador? (0 < end < %d) ", CARTEIRA_TAM);
             scanf("%u", &end);
             while (end > CARTEIRA_TAM) scanf("%u", &end);
-            printaNBlocosMinerados(blc, k, end);
+            printaNBlocosDoMinerador(blc, k, end);
+            break;
+        case 'h':
+            unsigned int j = 0;
+            printf("Quantos blocos serão printados? ");
+            scanf("%u", &j);
+            printaNBlocosOrdenados(blc, j);
+            break;
+        case 'i':
+            unsigned int nonce = 0;
+            printf("Qual o nonce dos blocos? ");
+            scanf("%u", &nonce);
+            printaBlocosComNonce(blc, nonce);
             break;
     }
 }
