@@ -189,5 +189,15 @@ void printaBlocosComNonce(Blockchain *blc, unsigned int nonce) {
     while(atual) {
         if (atual->bloco.nonce == nonce) printaBlocoMinerado(*atual);
         atual = atual->prox;
+        
+        
     }
+}
+void imprimirBlocoMinerado(BlocoMinerado blockchain, int n);
+{ 
+    printf("=============================\n");
+    printf("Bloco Minerado: \n");
+    printf("%p\n", BlocoMinerado *aux);
+    printf("=============================\n");
+
 }
