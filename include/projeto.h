@@ -10,6 +10,7 @@
 #define MAX_TRANSACOES (DATA_TAM - 1) / 3
 
 #include <stdbool.h>
+#include <stdio.h>//por ser um include usado pela maioria dos arquivos .c, foi conveniente deixa-lo aqui
 #include "openssl/sha.h"
 #include "mtwister.h"
 
@@ -72,6 +73,7 @@ void copiaCarteira(unsigned int[], unsigned int []);
 Blockchain * inicializaBlockchain();
 int novoBloco(Blockchain *);
 BlocoMinerado * obterBlocoPorNumero(Blockchain *, unsigned int);
+void desaloca(Blockchain *);
 
 Clientes criarBuffer(Blockchain *);
 Clientes gerarTransacoes(Blockchain *, unsigned char *);

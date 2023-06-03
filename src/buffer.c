@@ -1,6 +1,7 @@
 #include "projeto.h"
 
-Clientes criarBuffer(Blockchain *bc) {
+Clientes criarBuffer(Blockchain *bc)
+{
     Clientes novo;
 
     copiaCarteira(bc->clientes.carteira, novo.carteira);
